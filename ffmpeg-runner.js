@@ -24,28 +24,40 @@ const ffmpeg = spawn("ffmpeg", [
   "-c:v",
   "libx264",
   "-preset",
-  "veryfast",
+  "ultrafast", // Faster encoding
+  "-tune",
+  "zerolatency", // Optimize for low latency
   "-g",
-  "25",
+  "15", // Reduced GOP size
   "-sc_threshold",
   "0",
+  "-bufsize",
+  "2000k",
+  "-maxrate",
+  "2000k",
   "-f",
   "hls",
   "-hls_time",
-  "2",
+  "1", // Reduced segment time
   "-hls_list_size",
-  "3",
+  "2", // Keep fewer segments
   "-hls_flags",
-  "delete_segments",
+  "delete_segments+append_list+omit_endlist", // Optimize for low latency
+  "-hls_segment_type",
+  "mpegts",
+  "-hls_init_time",
+  "1",
+  "-hls_segment_filename",
+  path.join(hlsDir, "segment_%d.ts"),
   path.join(hlsDir, "stream.m3u8"),
 ]);
 
 ffmpeg.stdout.on("data", (data) => {
-  console.log(`FFmpeg stdout: ${data}`);
+  // console.log(`FFmpeg stdout: ${data}`);
 });
 
 ffmpeg.stderr.on("data", (data) => {
-  console.error(`FFmpeg stderr: ${data}`);
+  // console.error(`FFmpeg stderr: ${data}`);
 });
 
 ffmpeg.on("close", (code) => {

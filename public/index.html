@@ -81,10 +81,16 @@
             debug: false,
             enableWorker: true,
             lowLatencyMode: true,
-            backBufferLength: 90,
-            manifestLoadingTimeOut: 10000,
-            manifestLoadingMaxRetry: 3,
-            manifestLoadingRetryDelay: 1000,
+            backBufferLength: 30,
+            liveSyncDurationCount: 2,
+            liveMaxLatencyDurationCount: 3,
+            maxBufferLength: 4,
+            maxMaxBufferLength: 6,
+            manifestLoadingTimeOut: 5000,
+            manifestLoadingMaxRetry: 2,
+            manifestLoadingRetryDelay: 500,
+            levelLoadingTimeOut: 5000,
+            fragLoadingTimeOut: 5000,
           });
 
           hls.loadSource("/hls/stream.m3u8");
