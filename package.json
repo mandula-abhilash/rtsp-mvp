@@ -1,11 +1,12 @@
 {
   "name": "rtsp-mvp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "RTSP to HLS streaming server",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "server": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start-stream": "node ffmpeg-runner.js"
   },
   "keywords": [],
   "author": "",
